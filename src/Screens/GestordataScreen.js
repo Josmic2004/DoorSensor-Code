@@ -13,7 +13,7 @@ const GestorDataScreen = ({ navigation }) => {
     const dbRef = ref(db);
 
     try {
-      const snapshot = await get(child(dbRef, "puerta/movimiento"));
+      const snapshot = await get(child(dbRef, "puerta/movimiento/detecciones"));
       if (snapshot.exists()) {
         const data = snapshot.val();
         setData(Object.entries(data)); // Convertir el objeto en un array para FlatList
@@ -32,11 +32,10 @@ const GestorDataScreen = ({ navigation }) => {
   }, []);
 
   const renderItem = ({ item }) => {
-    const [key, { status, timestamp }] = item;
+    const [key, { estado }] = item;
     return (
       <View style={styles.itemContainer}>
-        <Text style={styles.itemText}>{status}</Text>
-        <Text style={styles.itemText}>{timestamp}</Text>
+        <Text style={styles.itemText}>{estado}</Text>
       </View>
     );
   };
@@ -152,4 +151,3 @@ const styles = StyleSheet.create({
 });
 
 export default GestorDataScreen;
-
